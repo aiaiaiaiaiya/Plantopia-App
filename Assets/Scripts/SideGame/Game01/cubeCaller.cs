@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using DG.Tweening;
 
 public class cubeCaller : MonoBehaviour {
 
@@ -9,13 +11,33 @@ public class cubeCaller : MonoBehaviour {
 	GameObject c;
 	bool hasCube;
 
+	public Text scoreText;
+	int score;
+
+	public Text timerTxt;
+	public int timer;
+	int countdown = 100;
+
+	public GameObject btn;
+
 	// Use this for initialization
 	void Start () {
 		hasCube = false;
+		score = 0;
 	}
 	
 	// Update is called once per frame
 	void Update () {
+		if (countdown <= 0) {
+			if (score < 3)
+				scoreText.color = Color.red;
+			btn.SetActive (true);
+		} else {
+			countdown = (timer - (int)Time.timeSinceLevelLoad);
+			if (score > 3)
+				scoreText.color = Color.green;
+			timerTxt.text = countdown.ToString ();
+		}
 		
 	}
 
@@ -35,7 +57,8 @@ public class cubeCaller : MonoBehaviour {
 			}
 			cAnim.SetTrigger ("done");
 			hasCube = false;
+			score += 1;
+			scoreText.text = score.ToString ();
 		}
 	}
-		
 }

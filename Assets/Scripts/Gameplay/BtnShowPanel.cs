@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 public class BtnShowPanel : MonoBehaviour {
 
@@ -45,15 +46,16 @@ public class BtnShowPanel : MonoBehaviour {
 			string itemsDataString = itemsData.text;
 			items = itemsDataString.Split (',');
 
-			lightTxt.text = items [2] + " lux";
-			temperatureTxt.text = items [3] + " °C";
-			waterTempTxt.text = items [4] + " °C";
-			pumpSpeedTxt.text = items [5] + " L/min";
+			lightTxt.text = PlayerPrefs.GetFloat ("light") + " lux";
+
+			temperatureTxt.text = PlayerPrefs.GetFloat ("temperature") + " °C";
+			waterTempTxt.text = PlayerPrefs.GetFloat ("waterTemp") + " °C";
+//			pumpSpeedTxt.text = items [5] + " L/min";
 
 			PlayerPrefs.SetFloat ("light", float.Parse(items [2]));
-			PlayerPrefs.SetFloat ("temperature", float.Parse(items [3]));
-			PlayerPrefs.SetFloat ("waterTemp", float.Parse(items [4]));
-			PlayerPrefs.SetFloat ("pumpSpeed", float.Parse(items [5]));
+			PlayerPrefs.SetFloat ("temperature", float.Parse(items [4]));
+			PlayerPrefs.SetFloat ("waterTemp", float.Parse(items [3]));
+			PlayerPrefs.SetFloat ("diameter", float.Parse(items [5]));
 			PlayerPrefs.Save ();
 
 			yield return repeatInTime;

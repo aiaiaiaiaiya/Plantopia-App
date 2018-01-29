@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class MainManager : MonoBehaviour {
 	public GameObject mainSolution;
@@ -10,10 +11,26 @@ public class MainManager : MonoBehaviour {
 	Image mainImg;
 	float t;
 
+	public GameObject colorShowobj;
+	Image colorShowImg;
+	public Color[] colorList;
+	Color colorShow;
+
+	public Text scoreText;
+
+	int score;
+
+	public AudioSource correct;
+	public AudioSource wrong;
+
+	public GameObject btn;
+
 
 	// Use this for initialization
 	void Start () {
 		mainImg = mainSolution.GetComponent<Image> ();
+		colorShowImg = colorShowobj.GetComponent<Image> ();
+		RandomColor ();
 	}
 	
 	// Update is called once per frame
@@ -48,5 +65,30 @@ public class MainManager : MonoBehaviour {
 		}
 		result /= aColors.Length;
 		return result;
+	}
+
+	public void Discard(){
+		mainImg.color = new Color (0, 0, 0, 0);
+	}
+
+	void RandomColor(){
+		colorShow = colorList [Random.Range (0, 3)];
+		colorShowImg.color = colorShow;
+	}
+
+	public void Submit(){
+		if (mainImg.color == colorShow && score < 3) {
+			score += 1;
+			scoreText.text = score.ToString ();
+			correct.Play ();
+			RandomColor ();
+			if (score == 3) {
+				btn.SetActive (true);
+			}
+		} else {
+			wrong.Play ();
+		}
+		Discard ();
+
 	}
 }
