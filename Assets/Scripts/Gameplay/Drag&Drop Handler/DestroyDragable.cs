@@ -14,13 +14,11 @@ public class DestroyDragable : MonoBehaviour {
 
 	WaitForSeconds delay = new WaitForSeconds(2f);
 
-	[HideInInspector]
-	public bool addlight;
-	[HideInInspector]
-	public bool addpumpSpeed;
+	bool addlight = false;
+	bool addpumpSpeed = false;
 
-	float lightVal;
-	float pumpSpeedVal;
+	float lightVal = 255; //255 ---- 15 min -> 0
+	float pumpSpeedVal = 80; //80 ---- 5 min -> 50
 
 	int plantId;
 
@@ -32,35 +30,38 @@ public class DestroyDragable : MonoBehaviour {
 		anim = this.gameObject.GetComponent <Animator> ();
 	}
 
+	void Update(){
+		System.DateTime CurrentDate = new System.DateTime();
+		CurrentDate = System.DateTime.Now;
+		if (CurrentDate.Hour == 5) {
+			StartCoroutine (InsertControlLight (lightVal.ToString ()));
+		}
+	}
+
 	void OnTriggerEnter2D(Collider2D other) {
 		plantId = PlayerPrefs.GetInt ("plantID");
-		lightVal = PlayerPrefs.GetFloat ("light");
-		pumpSpeedVal = PlayerPrefs.GetFloat ("pumpSpeed");
-
-		print ("TRIGGER: light = "+lightVal);
-		print ("TRIGGER: pump = "+pumpSpeedVal);
+//		lightVal = PlayerPrefs.GetFloat ("light");
+//		pumpSpeedVal = PlayerPrefs.GetFloat ("pumpSpeed");
 
 		GameObject obj = other.gameObject;
 		Destroy (obj);
 
 		if (obj.CompareTag ("draggable")) {
 			
-			if (obj.name.Equals ("Sun")) {
-				
+			if (obj.name.Equals ("Sun") && !addlight) {
+				addlight = true;
 				StartCoroutine (InstantiacteObj (obj,other,Sunobj));
-				lightVal += 200;
-				print ("+200 => light = "+lightVal);
+				print ("+255 => light = "+lightVal);
 				StartCoroutine (InsertControlLight (lightVal.ToString ()));
-				PlayerPrefs.SetFloat ("light", lightVal);
+				StartCoroutine (DelayToggle("light"));
 				anim.SetTrigger ("Sun");
 				sunSound.Play ();
-			} else if (obj.name.Equals ("Drop")) {
-				
+			} else if (obj.name.Equals ("Drop") && !addpumpSpeed) {
+				addpumpSpeed = true;
 				StartCoroutine (InstantiacteObj (obj,other,Dropobj));
-				pumpSpeedVal += 0.2f;
-				print ("+0.2 => pump = "+pumpSpeedVal);
+				print ("+80 => pump = "+pumpSpeedVal);
 				StartCoroutine (InsertControlPump (pumpSpeedVal.ToString ()));
-				PlayerPrefs.SetFloat ("pumpSpeed", pumpSpeedVal);
+				StartCoroutine (DelayToggle("pump"));
 				anim.SetTrigger ("Water");
 				dropSound.Play ();
 			} else if (obj.name.Equals ("Seed")) {
@@ -108,5 +109,18 @@ public class DestroyDragable : MonoBehaviour {
 		actionSound.Play ();
 	}
 
+	IEnumerator DelayToggle(string choice){
+		if (choice == "light") {
+			yield return new WaitForSeconds (30f);
+			print ("Delay light is done RESET value and put it to DB");
+			StartCoroutine (InsertControlLight ("0"));
+			addlight = false;
+		} else if (choice == "pump") {
+			yield return new WaitForSeconds (30f);
+			print ("Delay pump is done RESET value and put it to DB");
+			StartCoroutine (InsertControlPump ("50"));
+			addlight = false;
+		}
+	}
 
 }

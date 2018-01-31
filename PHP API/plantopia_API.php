@@ -98,7 +98,7 @@
 	//Read DB 'user_plant' By userID
 	if($_REQUEST['action'] == 'readPlantbyUserID'){
 		$userId = $_REQUEST['userId'];
-		$sql = "SELECT * FROM user_plant WHERE UserID = $userId";
+		$sql = "SELECT * FROM user_plant WHERE userID = $userId";
 		$result = mysqli_query($conn,$sql);
 		if(mysqli_num_rows($result) > 0){
 		//show data for each row
@@ -117,6 +117,30 @@
 		$result = mysqli_query($conn,$sql);
 		$row = mysqli_fetch_assoc($result);
 		echo $row['userID'].",".$row['FBUserId'].",".$row['username'].",".$row['DOR'].",".$row['gender'];
+	}
+
+	//Read DB 'event_detector'
+	if($_REQUEST['action'] == 'readEvent'){
+		$sql = "SELECT * FROM event_detector ORDER BY timestamp DESC LIMIT 1";
+		$result = mysqli_query($conn,$sql);
+		$row = mysqli_fetch_assoc($result);
+		echo $row['ID'].",".$row['date'].",".$row['event'];
+	}
+
+	//Insert DB 'event_detector'
+	if($_REQUEST['action'] == 'resetEvent'){
+		$sql = "INSERT INTO event_detector (event) VALUES('0')";
+		mysqli_query($conn,$sql);
+	}
+
+	//Read DB 'level_info' by plantTypeNo and level
+	if($_REQUEST['action'] == 'readLevelInfo'){
+		$plantTypeNo = $_REQUEST['plantTypeNo'];
+		$level = $_REQUEST['level'];
+		$sql = "SELECT * FROM level_info WHERE plantTypeNo = $plantTypeNo AND level = $level";
+		$result = mysqli_query($conn,$sql);
+		$row = mysqli_fetch_assoc($result);
+		echo $row['idealLight'].",".$row['idealWaterTemp'].",".$row['idealTemperature'].",".$row['idealDiameter'].",".$row['idealNutrient'];
 	}
 
 	// //Insert DB
