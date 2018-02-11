@@ -9,7 +9,7 @@ public class SceneManager1 : MonoBehaviour {
 		SceneManager.LoadScene (sceneName);
 	}
 
-	public void OffNoti(){
+	public void OffNoti(){ //call from "BackBtn" in each side-game
 		StartCoroutine ("ClearEvent");
 	}
 

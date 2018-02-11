@@ -60,6 +60,7 @@
      <Compile Include="Assets\FacebookSDK\Examples\Scripts\SubMenus\GraphRequest.cs" />
      <Compile Include="Assets\FacebookSDK\Examples\Scripts\SubMenus\MainMenu.cs" />
      <Compile Include="Assets\FacebookSDK\Examples\Scripts\SubMenus\Pay.cs" />
+     <Compile Include="Assets\Scripts\Character Selection\CharacterSel.cs" />
      <Compile Include="Assets\Scripts\Database(test)\Insert.cs" />
      <Compile Include="Assets\Scripts\Database(test)\select.cs" />
      <Compile Include="Assets\Scripts\DemoPot.cs" />

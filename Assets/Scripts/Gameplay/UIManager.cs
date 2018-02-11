@@ -25,6 +25,8 @@ public class UIManager : MonoBehaviour {
 	public GameObject diBox;
 	public Text diText;
 
+	List<int> dialogList;
+
 	WaitForSeconds repeatInTime = new WaitForSeconds(10f); //Repeat every x seconds
 
 	void Awake () {
@@ -32,6 +34,10 @@ public class UIManager : MonoBehaviour {
 		plantName.text = PlayerPrefs.GetString ("plantName");
 		StartCoroutine ("ReadEvent");
 		StartCoroutine ("ReadIdealInfo");
+	}
+
+	void Start(){
+		dialogList = new List<int> ();
 	}
 
 	void Update () {
@@ -67,32 +73,48 @@ public class UIManager : MonoBehaviour {
 
 
 			if (light > idealLight) {
-				diBox.SetActive (true);
-				diText.text = "โห สว่างจังเลย แสบตา~~~ ใบจะไหม้ไหมเนี่ย";
+				dialogList.Add (1);
+				print ("Add 1");
 			} else if (light < idealLight) {
-				diBox.SetActive (true);
-				diText.text = "หวา...มืดจังเลยนะ ใบฉันสังเคราะห์แสงไม่พอแน่ๆ";
+				dialogList.Add (2);
+				print ("Add 2");
 			}
 
-			// if (temp > idealtemp) {
-			// 	diBox.SetActive (true);
-			// 	diText.text = "";
-			// } else if (temp < idealtemp) {
-			// 	diBox.SetActive (true);
-			// 	diText.text = "";
-			// } 
-
 			if (wtemp > idealwtemp) {
-				diBox.SetActive (true);
-				diText.text = "จ๊ากกกก! รากร้อนมากเลย ช่วยเพิ่มความเร็วน้ำให้หน่อย!";
+				dialogList.Add (3);
+				print ("Add 3");
 			} else if (wtemp < idealwtemp) {
-				diBox.SetActive (true);
-				diText.text = "หวือ หนาวววววว หยุดเพิ่มความเร็วน้ำสักพักน้า";
+				dialogList.Add (4);
+				print ("Add 4");
 			} 
-				
+
+			RandomDialogList ();
 
 			yield return repeatInTime;
 		}
+	}
+
+	void RandomDialogList(){
+		int c = dialogList.Count;
+		int r = Random.Range (0, c);
+		if (dialogList [r] == 1) {
+			diBox.SetActive (true);
+			diText.text = "โห สว่างจังเลย แสบตา~~~ ใบจะไหม้ไหมเนี่ย";
+		} else if (dialogList [r] == 2) {
+			diBox.SetActive (true);
+			diText.text = "หวา...มืดจังเลยนะ ใบฉันสังเคราะห์แสงไม่พอแน่ๆ";
+		} else if (dialogList [r] == 3) {
+			diBox.SetActive (true);
+			diText.text = "จ๊ากกกก! รากร้อนมากเลย ช่วยเพิ่มความเร็วน้ำให้หน่อย!";
+		} else if (dialogList [r] == 4) {
+			diBox.SetActive (true);
+			diText.text = "หวือ หนาวววววว หยุดเพิ่มความเร็วน้ำสักพักน้า";
+		} else {
+			diBox.SetActive (false);
+		}
+
+		dialogList.Clear ();
+
 	}
 
 	IEnumerator ReadEvent () {

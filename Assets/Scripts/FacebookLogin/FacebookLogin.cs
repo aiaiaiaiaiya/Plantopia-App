@@ -91,6 +91,7 @@ public class FacebookLogin : MonoBehaviour {
 		}
 	}
 
+	//No account yet
 	public void SubmitUsername(){
 		username = UsernameInput.text.ToString ();
 		StartCoroutine ("InsertFBuserID");
