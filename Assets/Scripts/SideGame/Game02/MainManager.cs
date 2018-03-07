@@ -25,11 +25,14 @@ public class MainManager : MonoBehaviour {
 
 	public GameObject btn;
 
+	int i;
+
 
 	// Use this for initialization
 	void Start () {
 		mainImg = mainSolution.GetComponent<Image> ();
 		colorShowImg = colorShowobj.GetComponent<Image> ();
+		i = 0;
 		RandomColor ();
 	}
 	
@@ -72,8 +75,13 @@ public class MainManager : MonoBehaviour {
 	}
 
 	void RandomColor(){
-		colorShow = colorList [Random.Range (0, 3)];
+//		colorShow = colorList [Random.Range (0, 3)];
+
+
+		colorShow = colorList [i];
 		colorShowImg.color = colorShow;
+		i++;
+
 	}
 
 	public void Submit(){

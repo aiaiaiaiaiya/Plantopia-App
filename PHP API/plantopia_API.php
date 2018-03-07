@@ -31,10 +31,8 @@
 		$sql = "SELECT * FROM user WHERE FBUserId = '$_id'";
 		$result = mysqli_query($conn,$sql);
 		if(mysqli_num_rows($result) > 0){
-		//show data for each row
-			while ($row = mysqli_fetch_assoc($result)) {
-				echo $row['userID'].",".$row['username'];
-			}
+			$row = mysqli_fetch_assoc($result);
+			echo $row['userID'].",".$row['username'];
 		} else {
 			echo "0";
 		}

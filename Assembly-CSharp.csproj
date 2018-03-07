@@ -70,11 +70,15 @@
      <Compile Include="Assets\Scripts\Gameplay\Drag&amp;Drop Handler\DragHandle.cs" />
      <Compile Include="Assets\Scripts\Gameplay\GameManager.cs" />
      <Compile Include="Assets\Scripts\Gameplay\UIManager.cs" />
+     <Compile Include="Assets\Scripts\Graph\graph1.cs" />
      <Compile Include="Assets\Scripts\SceneManager1.cs" />
      <Compile Include="Assets\Scripts\SideGame\Game01\Game01sc.cs" />
      <Compile Include="Assets\Scripts\SideGame\Game01\GuideLine.cs" />
+     <Compile Include="Assets\Scripts\SideGame\Game01\TypeWriter.cs" />
      <Compile Include="Assets\Scripts\SideGame\Game01\cubeCaller.cs" />
+     <Compile Include="Assets\Scripts\SideGame\Game01\dialogScriptGame01.cs" />
      <Compile Include="Assets\Scripts\SideGame\Game02\MainManager.cs" />
+     <Compile Include="Assets\Scripts\SideGame\Game02\dialogScriptGame02.cs" />
      <None Include="Assets\Demigiant\DOTween\readme.txt" />
      <None Include="Assets\Plugins\Android\AndroidManifest.xml" />
      <None Include="Assets\Demigiant\DOTween\DOTween46.xml" />

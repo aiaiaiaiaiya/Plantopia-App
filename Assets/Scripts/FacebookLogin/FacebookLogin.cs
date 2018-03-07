@@ -12,6 +12,8 @@ public class FacebookLogin : MonoBehaviour {
 	public GameObject addUsernameModule;
 	public InputField UsernameInput;
 
+//	public Text testText;
+
 	// Awake function from Unity's MonoBehavior
 	void Awake ()
 	{
@@ -88,6 +90,7 @@ public class FacebookLogin : MonoBehaviour {
 			PlayerPrefs.Save ();
 
 			SceneManager.LoadScene ("CharacterSelection");
+//			testText.text = (PlayerPrefs.GetInt("userID") + PlayerPrefs.GetString("username"));
 		}
 	}
 

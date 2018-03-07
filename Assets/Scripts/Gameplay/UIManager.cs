@@ -33,7 +33,7 @@ public class UIManager : MonoBehaviour {
 		userName.text = PlayerPrefs.GetString ("username");
 		plantName.text = PlayerPrefs.GetString ("plantName");
 		StartCoroutine ("ReadEvent");
-		StartCoroutine ("ReadIdealInfo");
+//		StartCoroutine ("ReadIdealInfo");
 	}
 
 	void Start(){
@@ -141,9 +141,9 @@ public class UIManager : MonoBehaviour {
 
 	public void LoadEvent(){
 		if (eventNum == 1) {
-			SceneManager.LoadScene ("Game01");
+			SceneManager.LoadScene ("Game01-p");
 		} else if (eventNum == 2) {
-			SceneManager.LoadScene ("Game02");
+			SceneManager.LoadScene ("Game02-p");
 		}
 	}
 }

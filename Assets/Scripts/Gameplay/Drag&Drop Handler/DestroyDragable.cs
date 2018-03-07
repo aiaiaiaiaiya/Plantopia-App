@@ -53,7 +53,7 @@ public class DestroyDragable : MonoBehaviour {
 				StartCoroutine (InstantiacteObj (obj,other,Sunobj));
 				print ("+255 => light = "+lightVal);
 				StartCoroutine (InsertControlLight (lightVal.ToString ()));
-				StartCoroutine (DelayToggle("light"));
+//				StartCoroutine (DelayToggle("light"));
 				anim.SetTrigger ("Sun");
 				sunSound.Play ();
 			} else if (obj.name.Equals ("Drop") && !addpumpSpeed) {

@@ -7,11 +7,11 @@ public class CharacterSel : MonoBehaviour {
 
 	string[] items;
 	public Text name1;
-	public GameObject img1;
+//	public GameObject img1;
 
 	// Use this for initialization
 	void Start () {
-		PlayerPrefs.SetInt ("userID",10);
+//		PlayerPrefs.SetInt ("userID",10); //get this back after test Login with Mon FB or it is success!
 		StartCoroutine ("LoadPlant");
 	}
 	
@@ -33,6 +33,6 @@ public class CharacterSel : MonoBehaviour {
 		items = itemsDataString.Split (',');
 
 		name1.text = items [3];
-		img1.SetActive (true);
+//		img1.SetActive (true);
 	}
 }
