@@ -31,10 +31,10 @@ public class DragHandle : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
 
 	public void OnEndDrag (PointerEventData eventData)
 	{
-		if (this.gameObject.transform.position.y > 0) {
-			this.gameObject.transform.position = pos;
+		if (gameObject.transform.position != pos) {
+			gameObject.transform.position = pos;
 		} else { 
-			this.gameObject.transform.DOMove (pos,1f);
+			gameObject.transform.position = new Vector3 (500, 500, 500);
 		}
 	}
 

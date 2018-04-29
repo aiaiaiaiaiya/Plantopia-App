@@ -89,7 +89,7 @@ public class FacebookLogin : MonoBehaviour {
 			PlayerPrefs.SetString("username", items [1]);
 			PlayerPrefs.Save ();
 
-			SceneManager.LoadScene ("CharacterSelection");
+			SceneManager.LoadScene ("GameplayScene-RE");
 //			testText.text = (PlayerPrefs.GetInt("userID") + PlayerPrefs.GetString("username"));
 		}
 	}

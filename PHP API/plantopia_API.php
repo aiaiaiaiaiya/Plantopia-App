@@ -141,6 +141,23 @@
 		echo $row['idealLight'].",".$row['idealWaterTemp'].",".$row['idealTemperature'].",".$row['idealDiameter'].",".$row['idealNutrient'];
 	}
 
+	//Read DB 'user_potInput' by timestamp (each hours) for graph
+	if($_REQUEST['action'] == 'readPotInputForGraphDayHourly'){
+		$date = $_REQUEST['date'];
+		$sql = "SELECT AVG(light) as avgLight, AVG(waterTemp) as avgWtTemp, AVG(temperature) as avgTemp,
+			HOUR(timestamp) as hour
+			FROM user_potInput
+			WHERE DATE_SUB(`timestamp`,INTERVAL 1 HOUR) AND 
+			timestamp LIKE '$date%'
+			GROUP BY HOUR(timestamp)";
+		$result = mysqli_query($conn,$sql);
+		if(mysqli_num_rows($result) > 0){
+			while ($row = mysqli_fetch_assoc($result)) {
+				echo $row['hour'].",".$row['avgLight'].",".$row['avgWtTemp'].",".$row['avgTemp'].";";
+			}
+		}
+	}
+
 	// //Insert DB
 	// if($_REQUEST['action'] == 'insert'){
     //     $_username = $_REQUEST['username'];

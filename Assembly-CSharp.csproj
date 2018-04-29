@@ -6,7 +6,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{F220419F-A26C-0EFD-6661-DEAD79D0B02B}</ProjectGuid>
+    <ProjectGuid>{5BFE2A29-37C6-A018-C958-4717E19F3248}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -66,11 +66,15 @@
      <Compile Include="Assets\Scripts\DemoPot.cs" />
      <Compile Include="Assets\Scripts\FacebookLogin\FacebookLogin.cs" />
      <Compile Include="Assets\Scripts\Gameplay\BtnShowPanel.cs" />
+     <Compile Include="Assets\Scripts\Gameplay\BtnShowPanel1.cs" />
+     <Compile Include="Assets\Scripts\Gameplay\BtnShowPanel2.cs" />
      <Compile Include="Assets\Scripts\Gameplay\Drag&amp;Drop Handler\DestroyDragable.cs" />
      <Compile Include="Assets\Scripts\Gameplay\Drag&amp;Drop Handler\DragHandle.cs" />
      <Compile Include="Assets\Scripts\Gameplay\GameManager.cs" />
      <Compile Include="Assets\Scripts\Gameplay\UIManager.cs" />
      <Compile Include="Assets\Scripts\Graph\graph1.cs" />
+     <Compile Include="Assets\Scripts\Graph\graphmanager.cs" />
+     <Compile Include="Assets\Scripts\Graph\showGraphInfo.cs" />
      <Compile Include="Assets\Scripts\SceneManager1.cs" />
      <Compile Include="Assets\Scripts\SideGame\Game01\Game01sc.cs" />
      <Compile Include="Assets\Scripts\SideGame\Game01\GuideLine.cs" />
@@ -108,28 +112,28 @@
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityVR/RuntimeEditor/UnityEngine.VR.dll</HintPath>
  </Reference>
  <Reference Include="DOTween">
- <HintPath>D:/Unity project/Plantopia/Assets/Demigiant/DOTween/DOTween.dll</HintPath>
+ <HintPath>D:/Unity project/Plantopia-App/Assets/Demigiant/DOTween/DOTween.dll</HintPath>
  </Reference>
  <Reference Include="DOTween43">
- <HintPath>D:/Unity project/Plantopia/Assets/Demigiant/DOTween/DOTween43.dll</HintPath>
+ <HintPath>D:/Unity project/Plantopia-App/Assets/Demigiant/DOTween/DOTween43.dll</HintPath>
  </Reference>
  <Reference Include="DOTween46">
- <HintPath>D:/Unity project/Plantopia/Assets/Demigiant/DOTween/DOTween46.dll</HintPath>
+ <HintPath>D:/Unity project/Plantopia-App/Assets/Demigiant/DOTween/DOTween46.dll</HintPath>
  </Reference>
  <Reference Include="DOTween50">
- <HintPath>D:/Unity project/Plantopia/Assets/Demigiant/DOTween/DOTween50.dll</HintPath>
+ <HintPath>D:/Unity project/Plantopia-App/Assets/Demigiant/DOTween/DOTween50.dll</HintPath>
  </Reference>
  <Reference Include="Facebook.Unity">
- <HintPath>D:/Unity project/Plantopia/Assets/FacebookSDK/Plugins/Facebook.Unity.dll</HintPath>
+ <HintPath>D:/Unity project/Plantopia-App/Assets/FacebookSDK/Plugins/Facebook.Unity.dll</HintPath>
  </Reference>
  <Reference Include="Facebook.Unity.Gameroom">
- <HintPath>D:/Unity project/Plantopia/Assets/FacebookSDK/Plugins/Gameroom/Facebook.Unity.Gameroom.dll</HintPath>
+ <HintPath>D:/Unity project/Plantopia-App/Assets/FacebookSDK/Plugins/Gameroom/Facebook.Unity.Gameroom.dll</HintPath>
  </Reference>
  <Reference Include="FacebookNamedPipeClient">
- <HintPath>D:/Unity project/Plantopia/Assets/FacebookSDK/Plugins/Gameroom/FacebookNamedPipeClient.dll</HintPath>
+ <HintPath>D:/Unity project/Plantopia-App/Assets/FacebookSDK/Plugins/Gameroom/FacebookNamedPipeClient.dll</HintPath>
  </Reference>
  <Reference Include="Facebook.Unity.Settings">
- <HintPath>D:/Unity project/Plantopia/Assets/FacebookSDK/Plugins/Settings/Facebook.Unity.Settings.dll</HintPath>
+ <HintPath>D:/Unity project/Plantopia-App/Assets/FacebookSDK/Plugins/Settings/Facebook.Unity.Settings.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.iOS.Extensions.Xcode">
  <HintPath>C:/Program Files/Unity/Editor/Data/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Xcode.dll</HintPath>

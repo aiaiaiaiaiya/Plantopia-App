@@ -25,6 +25,7 @@ public class DestroyDragable : MonoBehaviour {
 	public GameObject Sunobj;
 	public GameObject Dropobj;
 	public GameObject Seedobj;
+//	public GameObject blockpanel;
 
 	void Start () {
 		anim = this.gameObject.GetComponent <Animator> ();
@@ -38,34 +39,41 @@ public class DestroyDragable : MonoBehaviour {
 		}
 	}
 
+//	void BlockPanel(){
+//		
+//	}
+
 	void OnTriggerEnter2D(Collider2D other) {
+		print ("Crash!-----------------------------");
 		plantId = PlayerPrefs.GetInt ("plantID");
 //		lightVal = PlayerPrefs.GetFloat ("light");
 //		pumpSpeedVal = PlayerPrefs.GetFloat ("pumpSpeed");
 
 		GameObject obj = other.gameObject;
-		Destroy (obj);
+
 
 		if (obj.CompareTag ("draggable")) {
-			
+//			blockpanel.SetActive (true);
 			if (obj.name.Equals ("Sun") && !addlight) {
+				anim.SetTrigger ("Sun");
+				sunSound.Play ();
 				addlight = true;
-				StartCoroutine (InstantiacteObj (obj,other,Sunobj));
+				InstantiacteObj (obj,Sunobj);
 				print ("+255 => light = "+lightVal);
 				StartCoroutine (InsertControlLight (lightVal.ToString ()));
 //				StartCoroutine (DelayToggle("light"));
-				anim.SetTrigger ("Sun");
-				sunSound.Play ();
+
 			} else if (obj.name.Equals ("Drop") && !addpumpSpeed) {
+				anim.SetTrigger ("Water");
+				dropSound.Play ();
 				addpumpSpeed = true;
-				StartCoroutine (InstantiacteObj (obj,other,Dropobj));
+				InstantiacteObj (obj,Dropobj);
 				print ("+80 => pump = "+pumpSpeedVal);
 				StartCoroutine (InsertControlPump (pumpSpeedVal.ToString ()));
 				StartCoroutine (DelayToggle("pump"));
-				anim.SetTrigger ("Water");
-				dropSound.Play ();
+
 			} else if (obj.name.Equals ("Seed")) {
-				StartCoroutine (InstantiacteObj (obj,other,Seedobj));
+				InstantiacteObj (obj,Seedobj);
 			}  
 
 //			else if (obj.name.Equals ("Seed")) {
@@ -74,7 +82,7 @@ public class DestroyDragable : MonoBehaviour {
 //				PlayerPrefs.SetFloat ("light", lightVal);
 //			}
 			PlayerPrefs.Save ();
-
+			Destroy (obj);
 
 		}
 	}
@@ -97,14 +105,12 @@ public class DestroyDragable : MonoBehaviour {
 		yield return insertData;
 	}
 
-	IEnumerator InstantiacteObj (GameObject obj, Collider2D other,GameObject eachObj) {
+	void InstantiacteObj (GameObject obj, GameObject eachObj) {
 		Vector3 v = obj.GetComponent<DragHandle> ().pos;
-		Transform slot = other.gameObject.transform.parent;
-
-		yield return new WaitForSeconds(2f);
+		Transform slot = obj.transform.parent;
 
 		GameObject ins = Instantiate (eachObj, v, slot.rotation, slot);
-		ins.transform.DOShakeScale (1f);
+//		ins.transform.DOShakeScale (1f);
 		ins.name = eachObj.name;
 		actionSound.Play ();
 	}
@@ -119,7 +125,7 @@ public class DestroyDragable : MonoBehaviour {
 			yield return new WaitForSeconds (30f);
 			print ("Delay pump is done RESET value and put it to DB");
 			StartCoroutine (InsertControlPump ("50"));
-			addlight = false;
+			addpumpSpeed = false;
 		}
 	}
 
