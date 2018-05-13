@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class UIManager : MonoBehaviour {
 
 	public Text userName;
-	public Text plantName;
+	public GameObject charactersPanel;
 
 	string[] items;
 
@@ -27,13 +27,16 @@ public class UIManager : MonoBehaviour {
 
 	List<int> dialogList;
 
-	WaitForSeconds repeatInTime = new WaitForSeconds(10f); //Repeat every x seconds
+	WaitForSeconds repeatInTime = new WaitForSeconds(30f); //Repeat every x seconds
 
 	void Awake () {
 		userName.text = PlayerPrefs.GetString ("username");
-		plantName.text = PlayerPrefs.GetString ("plantName");
+//		plantName.text = PlayerPrefs.GetString ("plantName");
+		ChangePlant(1);
+
 		StartCoroutine ("ReadEvent");
-//		StartCoroutine ("ReadIdealInfo");
+
+		StartCoroutine ("ReadIdealInfo");
 	}
 
 	void Start(){
@@ -42,6 +45,19 @@ public class UIManager : MonoBehaviour {
 
 	void Update () {
 		
+	}
+
+	public void ChangePlant(int chanum){
+		string label = "plantID_" + chanum.ToString ();
+		print ("THIS IS "+PlayerPrefs.GetInt (label));
+		for (int i = 0; i < 4; i++) {
+			if(i == chanum-1 && PlayerPrefs.GetInt (label) != 0)
+				charactersPanel.transform.GetChild (i).gameObject.SetActive (true);
+			else
+				charactersPanel.transform.GetChild (i).gameObject.SetActive (false);
+		}
+		label = "plantName_" + chanum.ToString ();
+		charactersPanel.transform.GetChild (4).GetComponent<Text> ().text = PlayerPrefs.GetString (label);
 	}
 
 	IEnumerator ReadIdealInfo () {
@@ -88,9 +104,11 @@ public class UIManager : MonoBehaviour {
 				print ("Add 4");
 			} 
 
+			yield return repeatInTime;
+
 			RandomDialogList ();
 
-			yield return repeatInTime;
+//			yield return repeatInTime;
 		}
 	}
 

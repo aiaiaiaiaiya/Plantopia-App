@@ -12,18 +12,18 @@
 		die("Connection Failed.".mysql_connect_error());
 	}
 	
-	//Read DB ----temporary fn
-	if($_REQUEST['action'] == 'read'){
-		$_id = $_REQUEST['id'];
-		$sql = "SELECT * FROM user WHERE userID = '$_id'";
-		$result = mysqli_query($conn,$sql);
-		if(mysqli_num_rows($result) > 0){
-		//show data for each row
-			while ($row = mysqli_fetch_assoc($result)) {
-				echo "ID:".$row['userID']."Username:".$row['username']." | Name:".$row['fName']." | Lastname:".$row['lName']." | Email:".$row['email'].";";
-			}
-		}
-	}
+	// //Read DB ----temporary fn
+	// if($_REQUEST['action'] == 'read'){
+	// 	$_id = $_REQUEST['id'];
+	// 	$sql = "SELECT * FROM user WHERE userID = '$_id'";
+	// 	$result = mysqli_query($conn,$sql);
+	// 	if(mysqli_num_rows($result) > 0){
+	// 	//show data for each row
+	// 		while ($row = mysqli_fetch_assoc($result)) {
+	// 			echo "ID:".$row['userID']."Username:".$row['username']." | Name:".$row['fName']." | Lastname:".$row['lName']." | Email:".$row['email'].";";
+	// 		}
+	// 	}
+	// }
 
 	//Read DB 'user' by FBuserID
 	if($_REQUEST['action'] == 'readFBuserID'){
@@ -46,42 +46,43 @@
 		mysqli_query($conn,$sql1);
 	}
 
-	//Read DB 'user_potInput' By plantID
+	//Read DB 'user_potInput' By plantID --> userID and remove diameter
 	if($_REQUEST['action'] == 'readPotInput'){
-		$plantId = $_REQUEST['plantId'];
-		$sql = "SELECT * FROM user_potInput WHERE plantId = $plantId ORDER BY timestamp DESC LIMIT 1";
+		$userID = $_REQUEST['userID'];
+		$sql = "SELECT * FROM user_potInput WHERE userID = $userID ORDER BY timestamp DESC LIMIT 1";
 		$result = mysqli_query($conn,$sql);
 		$row = mysqli_fetch_assoc($result);
-		echo $row['plantID'].",".$row['timestamp'].",".$row['light'].",".$row['waterTemp'].",".$row['temperature'].",".$row['diameter'];
+		// echo $row['userID'].",".$row['timestamp'].",".$row['light'].",".$row['waterTemp'].",".$row['temperature'].",".$row['diameter'];
+		echo $row['userID'].",".$row['timestamp'].",".$row['light'].",".$row['waterTemp'].",".$row['temperature'];
 	}
 
-	//Insert DB 'user_control'(Light) By plantID
+	//Insert DB 'user_control'(Light) By plantID --> userID
 	if($_REQUEST['action'] == 'insertControlLight'){
-		$plantId = $_REQUEST['plantId'];
+		$userID = $_REQUEST['userID'];
 		$light = $_REQUEST['light'];
-		$sql1 = "INSERT INTO user_control (plantID,light) VALUES('$plantId','$light')";
-		// $sql2 = "INSERT INTO user_potInput (plantID,light) VALUES('$plantId','$light')";
+		$sql1 = "INSERT INTO user_control (userID,light) VALUES('$userID','$light')";
+		// $sql2 = "INSERT INTO user_potInput (userID,light) VALUES('$userID','$light')";
 		mysqli_query($conn,$sql1);
 		// mysqli_query($conn,$sql2);
 	}
 
-	//Insert DB 'user_control'(Pump) By plantID
+	//Insert DB 'user_control'(Pump) By plantID --> userID
 	if($_REQUEST['action'] == 'insertControlPump'){
-		$plantId = $_REQUEST['plantId'];
+		$userID = $_REQUEST['userID'];
 		$pumpSpeed = $_REQUEST['pumpSpeed'];
-		$sql1 = "INSERT INTO user_control (plantID,pumpSpeed) VALUES('$plantId','$pumpSpeed')";
-		// $sql2 = "INSERT INTO user_potInput (plantID,pumpSpeed) VALUES('$plantId','$pumpSpeed')";
+		$sql1 = "INSERT INTO user_control (userID,pumpSpeed) VALUES('$userID','$pumpSpeed')";
+		// $sql2 = "INSERT INTO user_potInput (userID,pumpSpeed) VALUES('$userID','$pumpSpeed')";
 		mysqli_query($conn,$sql1);
 		// mysqli_query($conn,$sql2);
 	}
 
-	//Read DB 'user_control' By plantID
+	//Read DB 'user_control' By plantID --> userID
 	if($_REQUEST['action'] == 'readControl'){
-		$plantId = $_REQUEST['plantId'];
-		$sql = "SELECT * FROM user_control WHERE plantId = $plantId ORDER BY timestamp DESC LIMIT 1";
+		$userID = $_REQUEST['userID'];
+		$sql = "SELECT * FROM user_control WHERE userID = $userID ORDER BY timestamp DESC LIMIT 1";
 		$result = mysqli_query($conn,$sql);
 		$row = mysqli_fetch_assoc($result);
-		echo $row['plantID'].",".$row['timestamp'].",".$row['light'].",".$row['pumpSpeed'].",".$row['nutrientValve'];
+		echo $row['userID'].",".$row['timestamp'].",".$row['light'].",".$row['pumpSpeed'].",".$row['nutrientValve'];
 	}
 
 	//Read DB 'user_plant' By plantID
@@ -90,7 +91,7 @@
 		$sql = "SELECT * FROM user_plant WHERE plantId = $plantId";
 		$result = mysqli_query($conn,$sql);
 		$row = mysqli_fetch_assoc($result);
-		echo $row['userID'].",".$row['plantID'].",".$row['gender'].",".$row['plantName'].",".$row['plantTypeNo'].",".$row['DOB'].",".$row['level'].",".$row['plantHealth'];
+		echo $row['userID'].",".$row['plantID'].",".$row['plantName'].",".$row['plantTypeNo'].",".$row['DOB'].",".$row['level'].",".$row['plantHealth'];
 	}
 
 	//Read DB 'user_plant' By userID
@@ -101,7 +102,7 @@
 		if(mysqli_num_rows($result) > 0){
 		//show data for each row
 			while ($row = mysqli_fetch_assoc($result)) {
-				echo $row['userID'].",".$row['plantID'].",".$row['gender'].",".$row['plantName'].",".$row['plantTypeNo'].",".$row['DOB'].",".$row['level'].",".$row['plantHealth'];
+				echo $row['userID'].",".$row['plantID'].",".$row['plantName'].",".$row['plantTypeNo'].",".$row['DOB'].",".$row['level'].",".$row['plantHealth'].";";
 			}
 		} else {
 			echo "0";

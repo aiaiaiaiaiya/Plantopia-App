@@ -20,7 +20,9 @@ public class DestroyDragable : MonoBehaviour {
 	float lightVal = 255; //255 ---- 15 min -> 0
 	float pumpSpeedVal = 80; //80 ---- 5 min -> 50
 
-	int plantId;
+	/*TEMP CODE*/
+//	int userID = 4;
+	int userID;
 
 	public GameObject Sunobj;
 	public GameObject Dropobj;
@@ -29,6 +31,7 @@ public class DestroyDragable : MonoBehaviour {
 
 	void Start () {
 		anim = this.gameObject.GetComponent <Animator> ();
+		userID = PlayerPrefs.GetInt ("userID");
 	}
 
 	void Update(){
@@ -45,7 +48,7 @@ public class DestroyDragable : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D other) {
 		print ("Crash!-----------------------------");
-		plantId = PlayerPrefs.GetInt ("plantID");
+//		userID = PlayerPrefs.GetInt ("plantID");
 //		lightVal = PlayerPrefs.GetFloat ("light");
 //		pumpSpeedVal = PlayerPrefs.GetFloat ("pumpSpeed");
 
@@ -90,7 +93,7 @@ public class DestroyDragable : MonoBehaviour {
 	IEnumerator InsertControlLight(string l){
 		WWWForm form = new WWWForm ();
 		form.AddField ("action", "insertControlLight");
-		form.AddField ("plantId", plantId);
+		form.AddField ("userID", userID);
 		form.AddField ("light", l);
 		WWW insertData = new WWW ("http://54.169.202.67/plantopia_API.php",form);
 		yield return insertData;
@@ -99,7 +102,7 @@ public class DestroyDragable : MonoBehaviour {
 	IEnumerator InsertControlPump(string ps){
 		WWWForm form = new WWWForm ();
 		form.AddField ("action", "insertControlPump");
-		form.AddField ("plantId", plantId);
+		form.AddField ("userID", userID);
 		form.AddField ("pumpSpeed", ps);
 		WWW insertData = new WWW ("http://54.169.202.67/plantopia_API.php",form);
 		yield return insertData;

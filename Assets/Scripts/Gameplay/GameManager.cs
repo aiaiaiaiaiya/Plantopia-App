@@ -5,82 +5,141 @@ using UnityEngine;
 public class GameManager : MonoBehaviour {
 	
 	public static int setUserID = 11;
+	string username = "Tonkla";
+
 	string[] items;
-	int plantID = 1; //Temporary fixed plant ID
+//	int plantID = 1; //Temporary fixed plant ID
+
+	int userID;
 
 	void Awake () {
 		print ("Game Awake!");
 		SetUserID (); //temporary function bc no have LOGIN feature
-		StartCoroutine ("LoadUser");
+//		StartCoroutine ("LoadUser");
+		StartCoroutine ("LoadPlants");
 	}
 
-	void SetUserID () {
+	void SetUserID () { //INCASE of on PC
 		PlayerPrefs.SetInt ("userID", setUserID);
+		PlayerPrefs.SetString ("username", username);
 		PlayerPrefs.Save ();
 		print ("Already set user ID for testing");
+		userID = PlayerPrefs.GetInt ("userID");
 	}
 
-	IEnumerator LoadUser () {
-		int us = PlayerPrefs.GetInt ("userID");
+//	IEnumerator LoadUser () {
+//		int us = PlayerPrefs.GetInt ("userID");
+//		WWWForm form = new WWWForm ();
+//		form.AddField ("action", "readUser");
+//		form.AddField ("userId", us);
+//		WWW itemsData = new WWW ("http://54.169.202.67/plantopia_API.php", form);
+//		yield return itemsData;
+//		print ("LoadUser"+itemsData.text);
+//		string itemsDataString = itemsData.text;
+//		items = itemsDataString.Split (',');
+//
+////		PlayerPrefs.SetInt ("FBID", int.Parse(items [1]));
+//		PlayerPrefs.SetString ("username", items[2]);
+////		PlayerPrefs.SetString ("DOR", items [3]);
+////		PlayerPrefs.SetInt ("gender", int.Parse(items [4]));
+//		PlayerPrefs.Save ();
+//
+//		print ("Initial user Completed!");
+//		StartCoroutine ("LoadPlant");
+//	}
+
+	IEnumerator LoadPlants () {
+		int userID = PlayerPrefs.GetInt ("userID");
+		print (userID);
 		WWWForm form = new WWWForm ();
-		form.AddField ("action", "readUser");
-		form.AddField ("userId", us);
+		form.AddField ("action", "readPlantbyUserID");
+		form.AddField ("userId", userID); 
 		WWW itemsData = new WWW ("http://54.169.202.67/plantopia_API.php", form);
 		yield return itemsData;
-		print ("LoadUser"+itemsData.text);
-		string itemsDataString = itemsData.text;
-		items = itemsDataString.Split (',');
+		print ("--------------LoadPlant"+itemsData.text);
+		if (itemsData.text != "0") {
+			string itemsDataString = itemsData.text;
+			string[] rows = itemsDataString.Split (';');
+			print ("ROWS LENGHT : " + rows.Length);
+			for (int i = 0; i < rows.Length - 1; i++) { //-1 for split for over row
+				print ("LOOP LOADPLANTS: " + rows [i]);
+				items = rows [i].Split (',');
+				string label = "plantID_" + (i + 1).ToString ();
+				PlayerPrefs.SetInt (label, int.Parse (items [1]));
+				print ("SET: " + label + " = " + PlayerPrefs.GetInt (label));
 
-//		PlayerPrefs.SetInt ("FBID", int.Parse(items [1]));
-		PlayerPrefs.SetString ("username", items[2]);
-//		PlayerPrefs.SetString ("DOR", items [3]);
-//		PlayerPrefs.SetInt ("gender", int.Parse(items [4]));
-		PlayerPrefs.Save ();
+				label = "plantName_" + (i + 1).ToString ();
+				PlayerPrefs.SetString (label, items [2]);
+				print ("SET: " + label + " = " + PlayerPrefs.GetString (label));
 
-		print ("Initial user Completed!");
-		StartCoroutine ("LoadPlant");
+				label = "plantTypeNo_" + (i + 1).ToString ();
+				PlayerPrefs.SetInt (label, int.Parse (items [3]));
+				print ("SET: " + label + " = " + PlayerPrefs.GetInt (label));
+//			label = "plantID_" + i;
+//			PlayerPrefs.SetInt ("level", int.Parse(items [6]));
+				PlayerPrefs.Save ();
+			}
+		}
+
+	 
+
+
+	}
+//
+//	IEnumerator LoadPlant () {
+//		WWWForm form = new WWWForm ();
+//		form.AddField ("action", "readPlant");
+//		form.AddField ("plantId", plantID); 
+//		WWW itemsData = new WWW ("http://54.169.202.67/plantopia_API.php", form);
+//		yield return itemsData;
+//		print ("LoadPlant"+itemsData.text);
+//		string itemsDataString = itemsData.text;
+//		items = itemsDataString.Split (',');
+//
+//		PlayerPrefs.SetInt ("plantID", int.Parse(items [1]));
+//		PlayerPrefs.SetInt ("plantGender", int.Parse(items [2]));
+//		PlayerPrefs.SetString ("plantName", items [3]);
+//		PlayerPrefs.SetInt ("plantTypeNo", int.Parse(items [4]));
+//		PlayerPrefs.SetString ("DOB", items [5]);
+//		PlayerPrefs.SetInt ("level", int.Parse(items [6]));
+//		PlayerPrefs.SetInt ("plantHealth", int.Parse(items [7]));
+//		PlayerPrefs.Save ();
+//
+//		print ("Initial plant Completed!");
+//		StartCoroutine ("LoadPotInput");
+//	}
+
+	public void CallLoadPot(int chanum){
+		StartCoroutine (LoadPotInput(chanum));
 	}
 
-	IEnumerator LoadPlant () {
-		WWWForm form = new WWWForm ();
-		form.AddField ("action", "readPlant");
-		form.AddField ("plantId", plantID); 
-		WWW itemsData = new WWW ("http://54.169.202.67/plantopia_API.php", form);
-		yield return itemsData;
-		print ("LoadPlant"+itemsData.text);
-		string itemsDataString = itemsData.text;
-		items = itemsDataString.Split (',');
+	IEnumerator LoadPotInput (int chanum) {
+		/*REAL CODE*/
+//		string label = "plantID_" + chanum.ToString ();
+//		int loadplantID = PlayerPrefs.GetInt (label);
 
-		PlayerPrefs.SetInt ("plantID", int.Parse(items [1]));
-		PlayerPrefs.SetInt ("plantGender", int.Parse(items [2]));
-		PlayerPrefs.SetString ("plantName", items [3]);
-		PlayerPrefs.SetInt ("plantTypeNo", int.Parse(items [4]));
-		PlayerPrefs.SetString ("DOB", items [5]);
-		PlayerPrefs.SetInt ("level", int.Parse(items [6]));
-		PlayerPrefs.SetInt ("plantHealth", int.Parse(items [7]));
-		PlayerPrefs.Save ();
+		/*TEMP CODE*/
+//		int loadplantID = 4;
 
-		print ("Initial plant Completed!");
-		StartCoroutine ("LoadPotInput");
-	}
 
-	IEnumerator LoadPotInput () {
 		WWWForm form = new WWWForm ();
 		form.AddField ("action", "readPotInput");
-		form.AddField ("plantId", plantID);
+		form.AddField ("userID", userID);
 		WWW itemsData = new WWW ("http://54.169.202.67/plantopia_API.php", form);
 		yield return itemsData;
-		print ("LoadPotInput"+itemsData.text);
-		string itemsDataString = itemsData.text;
-		items = itemsDataString.Split (',');
+//		print ("LoadPotInput"+itemsData.text);
+		if (itemsData.text!=null) {
+			string itemsDataString = itemsData.text;
+			items = itemsDataString.Split (',');
 
-		PlayerPrefs.SetFloat ("light", float.Parse(items [2]));
-		PlayerPrefs.SetFloat ("temperature", float.Parse(items [4]));
-		PlayerPrefs.SetFloat ("waterTemp", float.Parse(items [3]));
-		PlayerPrefs.SetFloat ("diameter", float.Parse(items [5]));
-		PlayerPrefs.Save ();
+			PlayerPrefs.SetFloat ("light", float.Parse (items [2]));
+			PlayerPrefs.SetFloat ("temperature", float.Parse (items [4]));
+			PlayerPrefs.SetFloat ("waterTemp", float.Parse (items [3]));
+//		PlayerPrefs.SetFloat ("diameter", float.Parse(items [5]));
+			PlayerPrefs.Save ();
 
-		print ("Initial value Completed!");
+			print ("Initial value Completed!");
+		}
 	}
 
 

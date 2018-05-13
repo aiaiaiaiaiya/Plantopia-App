@@ -27,7 +27,7 @@ public class graphmanager : MonoBehaviour {
 //		string date = System.DateTime.Now.ToString("yyyy-MM-dd"); //.ToString("yyyy-MM-dd HH:mm:ss");
 //		print (date);
 		string date;
-		date = "2018-02-17";
+		date = System.DateTime.Now.ToString ("dd/MM/yyyy");
 		dateTxt.text = date;
 		StartCoroutine (ReadDBDay (date));
 

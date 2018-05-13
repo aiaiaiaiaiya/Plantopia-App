@@ -17,21 +17,22 @@ public class BtnShowPanel1 : MonoBehaviour {
 	public Text waterTempTxt;
 //	public Text pumpSpeedTxt;
 
-	int plantId;
+//	int plantId;
 
 	void Start () {
-		plantId = PlayerPrefs.GetInt ("plantID");
+//		plantId = PlayerPrefs.GetInt ("plantID");
 		rect = panel.GetComponent<RectTransform> ();
 	}
 	
 	public void ToggleShowPanel(){
 		if (!show) {
 			rect.anchoredPosition = Vector3.zero;
+			EditPanel ();
 			show = true;
-			StartCoroutine ("ReadDataQuery");
+//			StartCoroutine ("ReadDataQuery");
 		} else {
 			rect.anchoredPosition = new Vector3(-220,0,0);
-			StopCoroutine ("ReadDataQuery");
+//			StopCoroutine ("ReadDataQuery");
 			show = false;
 		}
 	}
@@ -40,17 +41,16 @@ public class BtnShowPanel1 : MonoBehaviour {
 		while (true) {
 			WWWForm form = new WWWForm ();
 			form.AddField ("action", "readPotInput");
-			form.AddField ("plantId", plantId);
+//			form.AddField ("plantId", plantId);
 			WWW itemsData = new WWW ("http://54.169.202.67/plantopia_API.php", form);
 			yield return itemsData;
 			print (itemsData.text);
 			string itemsDataString = itemsData.text;
 			items = itemsDataString.Split (',');
 
-			lightTxt.text = PlayerPrefs.GetFloat ("light") + " lux";
-
-			temperatureTxt.text = PlayerPrefs.GetFloat ("temperature") + " °C";
-			waterTempTxt.text = PlayerPrefs.GetFloat ("waterTemp") + " °C";
+			lightTxt.text = PlayerPrefs.GetFloat ("light").ToString () + " lux";
+			temperatureTxt.text = PlayerPrefs.GetFloat ("temperature").ToString ("#.##") + " °C";
+			waterTempTxt.text = PlayerPrefs.GetFloat ("waterTemp").ToString () + " °C";
 //			pumpSpeedTxt.text = PlayerPrefs.GetFloat ("pumpSpeed") + " L/min";
 
 
@@ -62,5 +62,11 @@ public class BtnShowPanel1 : MonoBehaviour {
 
 			yield return repeatInTime;
 		}
+	}
+
+	void EditPanel(){
+		lightTxt.text = PlayerPrefs.GetFloat ("light").ToString () + " lux";
+		temperatureTxt.text = PlayerPrefs.GetFloat ("temperature").ToString ("#.##") + " °C";
+		waterTempTxt.text = PlayerPrefs.GetFloat ("waterTemp").ToString () + " °C";
 	}
 }
