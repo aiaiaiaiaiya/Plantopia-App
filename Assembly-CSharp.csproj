@@ -65,6 +65,7 @@
      <Compile Include="Assets\Scripts\Database(test)\select.cs" />
      <Compile Include="Assets\Scripts\DemoPot.cs" />
      <Compile Include="Assets\Scripts\FacebookLogin\FacebookLogin.cs" />
+     <Compile Include="Assets\Scripts\Gameplay\AddingPlant.cs" />
      <Compile Include="Assets\Scripts\Gameplay\BtnShowPanel.cs" />
      <Compile Include="Assets\Scripts\Gameplay\BtnShowPanel1.cs" />
      <Compile Include="Assets\Scripts\Gameplay\BtnShowPanel2.cs" />
@@ -75,6 +76,7 @@
      <Compile Include="Assets\Scripts\Graph\graph1.cs" />
      <Compile Include="Assets\Scripts\Graph\graphmanager.cs" />
      <Compile Include="Assets\Scripts\Graph\showGraphInfo.cs" />
+     <Compile Include="Assets\Scripts\SceneLoading.cs" />
      <Compile Include="Assets\Scripts\SceneManager1.cs" />
      <Compile Include="Assets\Scripts\SideGame\Game01\Game01sc.cs" />
      <Compile Include="Assets\Scripts\SideGame\Game01\GuideLine.cs" />

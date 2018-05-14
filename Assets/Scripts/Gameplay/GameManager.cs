@@ -48,7 +48,30 @@ public class GameManager : MonoBehaviour {
 //		StartCoroutine ("LoadPlant");
 //	}
 
+//	public void CallLoadPlants(){
+//		StartCoroutine ("LoadPlants");
+//	}
+
 	IEnumerator LoadPlants () {
+		//clear player pref
+		for (int i = 0; i < 4; i++) {
+			string label = "plantID_" + (i + 1).ToString ();
+			PlayerPrefs.SetInt (label, 0);
+			print ("SET: " + label + " = " + PlayerPrefs.GetInt (label));
+
+			label = "plantName_" + (i + 1).ToString ();
+			PlayerPrefs.SetString (label, "");
+			print ("SET: " + label + " = " + PlayerPrefs.GetString (label));
+
+			label = "plantTypeNo_" + (i + 1).ToString ();
+			PlayerPrefs.SetInt (label, 0);
+			print ("SET: " + label + " = " + PlayerPrefs.GetInt (label));
+			//			label = "plantID_" + i;
+			//			PlayerPrefs.SetInt ("level", int.Parse(items [6]));
+			PlayerPrefs.Save ();
+		}
+
+
 		int userID = PlayerPrefs.GetInt ("userID");
 		print (userID);
 		WWWForm form = new WWWForm ();
@@ -80,6 +103,9 @@ public class GameManager : MonoBehaviour {
 				PlayerPrefs.Save ();
 			}
 		}
+
+		UIManager sc = gameObject.GetComponent<UIManager> ();
+		sc.ChangePlant(1);
 
 	 
 

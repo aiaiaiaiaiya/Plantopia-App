@@ -8,6 +8,7 @@ public class UIManager : MonoBehaviour {
 
 	public Text userName;
 	public GameObject charactersPanel;
+	public GameObject addBtn;
 
 	string[] items;
 
@@ -32,7 +33,7 @@ public class UIManager : MonoBehaviour {
 	void Awake () {
 		userName.text = PlayerPrefs.GetString ("username");
 //		plantName.text = PlayerPrefs.GetString ("plantName");
-		ChangePlant(1);
+
 
 		StartCoroutine ("ReadEvent");
 
@@ -51,13 +52,20 @@ public class UIManager : MonoBehaviour {
 		string label = "plantID_" + chanum.ToString ();
 		print ("THIS IS "+PlayerPrefs.GetInt (label));
 		for (int i = 0; i < 4; i++) {
-			if(i == chanum-1 && PlayerPrefs.GetInt (label) != 0)
+			if (i == chanum - 1 && PlayerPrefs.GetInt (label) != 0) {
 				charactersPanel.transform.GetChild (i).gameObject.SetActive (true);
-			else
-				charactersPanel.transform.GetChild (i).gameObject.SetActive (false);
+				label = "plantName_" + chanum.ToString ();
+				charactersPanel.transform.GetChild (4).GetComponent<Text> ().text = PlayerPrefs.GetString (label);
+				charactersPanel.transform.GetChild (4).gameObject.SetActive (true);
+				addBtn.SetActive (false);
+			} else if (i != chanum - 1) {
+				charactersPanel.transform.GetChild (i).gameObject.SetActive (false);			
+			} else {
+				addBtn.SetActive (true);
+				charactersPanel.transform.GetChild (4).gameObject.SetActive (false);
+			}
 		}
-		label = "plantName_" + chanum.ToString ();
-		charactersPanel.transform.GetChild (4).GetComponent<Text> ().text = PlayerPrefs.GetString (label);
+
 	}
 
 	IEnumerator ReadIdealInfo () {

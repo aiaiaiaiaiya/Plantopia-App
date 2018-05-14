@@ -2,13 +2,10 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Gameplay\GameManager.cs">
     <Files>
-      <File FileName="Assets\Scripts\Gameplay\GameManager.cs" Line="134" Column="4" />
-      <File FileName="Assets\Scripts\Gameplay\UIManager.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Gameplay\BtnShowPanel1.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Graph\graphmanager.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Gameplay\Drag&amp;Drop Handler\DestroyDragable.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\FacebookLogin\FacebookLogin.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Gameplay\BtnShowPanel2.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Gameplay\AddingPlant.cs" Line="37" Column="3" />
+      <File FileName="Assets\Scripts\Gameplay\GameManager.cs" Line="105" Column="4" />
+      <File FileName="Assets\Scripts\Gameplay\UIManager.cs" Line="36" Column="3" />
+      <File FileName="Assets\Scripts\SceneLoading.cs" Line="10" Column="46" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

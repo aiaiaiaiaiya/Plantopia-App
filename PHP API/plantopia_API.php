@@ -184,4 +184,13 @@
 	// 	mysqli_query($conn,$sql);
 	// }
 
+	//Insert DB 'user_plant' By userID
+	if($_REQUEST['action'] == 'insertPlant'){
+		$userID = $_REQUEST['userID'];
+		$plantname = $_REQUEST['plantname'];
+		$planttype = $_REQUEST['planttype'];
+		$sql = "INSERT INTO user_plant (userID,plantName,plantTypeNo) VALUES('$userID','$plantname','$planttype')";
+		mysqli_query($conn,$sql);
+	}
+
 ?>
