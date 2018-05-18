@@ -66,6 +66,10 @@ public class GameManager : MonoBehaviour {
 			label = "plantTypeNo_" + (i + 1).ToString ();
 			PlayerPrefs.SetInt (label, 0);
 			print ("SET: " + label + " = " + PlayerPrefs.GetInt (label));
+
+			label = "plantLevel_" + (i + 1).ToString ();
+			PlayerPrefs.SetInt (label, 0);
+			print ("SET: " + label + " = " + PlayerPrefs.GetInt (label));
 			//			label = "plantID_" + i;
 			//			PlayerPrefs.SetInt ("level", int.Parse(items [6]));
 			PlayerPrefs.Save ();
@@ -98,6 +102,11 @@ public class GameManager : MonoBehaviour {
 				label = "plantTypeNo_" + (i + 1).ToString ();
 				PlayerPrefs.SetInt (label, int.Parse (items [3]));
 				print ("SET: " + label + " = " + PlayerPrefs.GetInt (label));
+
+				label = "plantLevel_" + (i + 1).ToString ();
+				PlayerPrefs.SetInt (label, int.Parse (items [5]));
+				print ("SET: " + label + " = " + PlayerPrefs.GetInt (label));
+
 //			label = "plantID_" + i;
 //			PlayerPrefs.SetInt ("level", int.Parse(items [6]));
 				PlayerPrefs.Save ();

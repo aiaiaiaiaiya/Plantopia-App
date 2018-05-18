@@ -102,7 +102,7 @@
 		if(mysqli_num_rows($result) > 0){
 		//show data for each row
 			while ($row = mysqli_fetch_assoc($result)) {
-				echo $row['userID'].",".$row['plantID'].",".$row['plantName'].",".$row['plantTypeNo'].",".$row['DOB'].",".$row['level'].",".$row['plantHealth'].";";
+				echo $row['userID'].",".$row['plantID'].",".$row['plantName'].",".$row['plantTypeNo'].",".$row['DOB'].",".$row['level'].";";
 			}
 		} else {
 			echo "0";

@@ -52,15 +52,34 @@ public class UIManager : MonoBehaviour {
 		string label = "plantID_" + chanum.ToString ();
 		print ("THIS IS "+PlayerPrefs.GetInt (label));
 		for (int i = 0; i < 4; i++) {
-			if (i == chanum - 1 && PlayerPrefs.GetInt (label) != 0) {
+			if (i == chanum - 1 && PlayerPrefs.GetInt (label) != 0) { //Show this slot
 				charactersPanel.transform.GetChild (i).gameObject.SetActive (true);
+
+				//Show character by level
+				string level = "plantLevel_" + chanum.ToString ();
+				for (int j = 0; j < 2; j++) {
+					charactersPanel.transform.GetChild (i).GetChild (0).gameObject.SetActive (false);
+					charactersPanel.transform.GetChild (i).GetChild (1).gameObject.SetActive (false);
+					if(PlayerPrefs.GetInt (level) == 1){
+						print (charactersPanel.transform.GetChild (i).GetChild (0).name);
+						print (charactersPanel.transform.GetChild (i).GetChild (1).name);
+						charactersPanel.transform.GetChild (i).GetChild (0).gameObject.SetActive (true);
+						charactersPanel.transform.GetChild (i).GetChild (1).gameObject.SetActive (false);
+					} else if(PlayerPrefs.GetInt (level) == 2){
+						charactersPanel.transform.GetChild (i).GetChild (0).gameObject.SetActive (false);
+						charactersPanel.transform.GetChild (i).GetChild (1).gameObject.SetActive (true);
+					}
+				}
+
+				addBtn.SetActive (false);
 				label = "plantName_" + chanum.ToString ();
 				charactersPanel.transform.GetChild (4).GetComponent<Text> ().text = PlayerPrefs.GetString (label);
 				charactersPanel.transform.GetChild (4).gameObject.SetActive (true);
+			} else if (i != chanum - 1) { //Hide this slot
+				charactersPanel.transform.GetChild (i).gameObject.SetActive (false);
 				addBtn.SetActive (false);
-			} else if (i != chanum - 1) {
-				charactersPanel.transform.GetChild (i).gameObject.SetActive (false);			
-			} else {
+				charactersPanel.transform.GetChild (4).gameObject.SetActive (false);
+			} else { //Empty slot
 				addBtn.SetActive (true);
 				charactersPanel.transform.GetChild (4).gameObject.SetActive (false);
 			}
