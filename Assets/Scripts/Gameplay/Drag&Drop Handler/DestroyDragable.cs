@@ -20,14 +20,11 @@ public class DestroyDragable : MonoBehaviour {
 	float lightVal = 255; //255 ---- 15 min -> 0
 	float pumpSpeedVal = 80; //80 ---- 5 min -> 50
 
-	/*TEMP CODE*/
-//	int userID = 4;
 	int userID;
 
 	public GameObject Sunobj;
 	public GameObject Dropobj;
 	public GameObject Seedobj;
-//	public GameObject blockpanel;
 
 	void Start () {
 		anim = this.gameObject.GetComponent <Animator> ();
@@ -42,21 +39,14 @@ public class DestroyDragable : MonoBehaviour {
 		}
 	}
 
-//	void BlockPanel(){
-//		
-//	}
-
 	void OnTriggerEnter2D(Collider2D other) {
 		print ("Crash!-----------------------------");
-//		userID = PlayerPrefs.GetInt ("plantID");
-//		lightVal = PlayerPrefs.GetFloat ("light");
-//		pumpSpeedVal = PlayerPrefs.GetFloat ("pumpSpeed");
 
 		GameObject obj = other.gameObject;
 
 
 		if (obj.CompareTag ("draggable")) {
-//			blockpanel.SetActive (true);
+
 			if (obj.name.Equals ("Sun") && !addlight) {
 				anim.SetTrigger ("Sun");
 				sunSound.Play ();
@@ -64,7 +54,6 @@ public class DestroyDragable : MonoBehaviour {
 				InstantiacteObj (obj,Sunobj);
 				print ("+255 => light = "+lightVal);
 				StartCoroutine (InsertControlLight (lightVal.ToString ()));
-//				StartCoroutine (DelayToggle("light"));
 
 			} else if (obj.name.Equals ("Drop") && !addpumpSpeed) {
 				anim.SetTrigger ("Water");
@@ -78,12 +67,6 @@ public class DestroyDragable : MonoBehaviour {
 			} else if (obj.name.Equals ("Seed")) {
 				InstantiacteObj (obj,Seedobj);
 			}  
-
-//			else if (obj.name.Equals ("Seed")) {
-//				lightVal = PlayerPrefs.GetFloat ("light");
-//				lightVal = lightVal + 10;
-//				PlayerPrefs.SetFloat ("light", lightVal);
-//			}
 			PlayerPrefs.Save ();
 			Destroy (obj);
 
@@ -113,7 +96,6 @@ public class DestroyDragable : MonoBehaviour {
 		Transform slot = obj.transform.parent;
 
 		GameObject ins = Instantiate (eachObj, v, slot.rotation, slot);
-//		ins.transform.DOShakeScale (1f);
 		ins.name = eachObj.name;
 		actionSound.Play ();
 	}

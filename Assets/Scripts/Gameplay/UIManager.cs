@@ -32,8 +32,6 @@ public class UIManager : MonoBehaviour {
 
 	void Awake () {
 		userName.text = PlayerPrefs.GetString ("username");
-//		plantName.text = PlayerPrefs.GetString ("plantName");
-
 
 		StartCoroutine ("ReadEvent");
 
@@ -49,6 +47,7 @@ public class UIManager : MonoBehaviour {
 	}
 
 	public void ChangePlant(int chanum){
+		bool showname = false;
 		string label = "plantID_" + chanum.ToString ();
 		print ("THIS IS "+PlayerPrefs.GetInt (label));
 		for (int i = 0; i < 4; i++) {
@@ -74,15 +73,20 @@ public class UIManager : MonoBehaviour {
 				addBtn.SetActive (false);
 				label = "plantName_" + chanum.ToString ();
 				charactersPanel.transform.GetChild (4).GetComponent<Text> ().text = PlayerPrefs.GetString (label);
-				charactersPanel.transform.GetChild (4).gameObject.SetActive (true);
+				showname = true;
 			} else if (i != chanum - 1) { //Hide this slot
 				charactersPanel.transform.GetChild (i).gameObject.SetActive (false);
 				addBtn.SetActive (false);
-				charactersPanel.transform.GetChild (4).gameObject.SetActive (false);
 			} else { //Empty slot
 				addBtn.SetActive (true);
+			}
+
+			if (showname) {
+				charactersPanel.transform.GetChild (4).gameObject.SetActive (true);
+			} else {
 				charactersPanel.transform.GetChild (4).gameObject.SetActive (false);
 			}
+
 		}
 
 	}
@@ -108,7 +112,6 @@ public class UIManager : MonoBehaviour {
 			idealtemp = float.Parse (items [2]);
 			wtemp = PlayerPrefs.GetFloat ("waterTemp");
 			idealwtemp = float.Parse (items [1]);
-//			PlayerPrefs.GetFloat ("diameter", float.Parse(items [5]));
 
 			print ("INFO: light->" + light + " | ideal " + idealLight);
 			print ("INFO: temp->" + temp + " | ideal " + idealtemp);
@@ -135,7 +138,6 @@ public class UIManager : MonoBehaviour {
 
 			RandomDialogList ();
 
-//			yield return repeatInTime;
 		}
 	}
 

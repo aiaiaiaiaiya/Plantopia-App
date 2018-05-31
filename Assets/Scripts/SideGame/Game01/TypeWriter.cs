@@ -2,8 +2,6 @@
 using System.Collections;
 using UnityEngine.UI;
 
-// attach to UI Text component (with the full text already there)
-
 public class TypeWriter : MonoBehaviour 
 {
 
@@ -15,8 +13,6 @@ public class TypeWriter : MonoBehaviour
 		txt = GetComponent<Text> ();
 		story = txt.text;
 		txt.text = "";
-
-		// TODO: add optional delay when to start
 		StartCoroutine ("PlayText");
 	}
 

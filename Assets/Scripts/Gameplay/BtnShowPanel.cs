@@ -14,7 +14,6 @@ public class BtnShowPanel : MonoBehaviour {
 	public Text lightTxt;
 	public Text temperatureTxt;
 	public Text waterTempTxt;
-//	public Text pumpSpeedTxt;
 
 	int plantId;
 
@@ -50,8 +49,6 @@ public class BtnShowPanel : MonoBehaviour {
 
 			temperatureTxt.text = PlayerPrefs.GetFloat ("temperature") + " °C";
 			waterTempTxt.text = PlayerPrefs.GetFloat ("waterTemp") + " °C";
-//			pumpSpeedTxt.text = PlayerPrefs.GetFloat ("pumpSpeed") + " L/min";
-
 
 			PlayerPrefs.SetFloat ("light", float.Parse(items [2]));
 			PlayerPrefs.SetFloat ("temperature", float.Parse(items [4]));

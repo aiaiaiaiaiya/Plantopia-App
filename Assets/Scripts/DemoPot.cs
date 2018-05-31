@@ -29,12 +29,8 @@ public class DemoPot : MonoBehaviour {
 	IEnumerator ShowLight () {
 		while (true) {
 			if (p != old_p && p != "" && i > 1) {
-//				pnk.intensity = 5f;
-//				blu.intensity = 0f;
 				anim.SetTrigger ("pnk");
 			} else if (b != old_b && b != "" && i > 1) {
-//				pnk.intensity = 0f;
-//				blu.intensity = 4f;
 				anim.SetTrigger ("blu");
 			} else {
 				pnk.intensity = 1f;

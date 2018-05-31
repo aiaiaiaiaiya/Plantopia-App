@@ -15,12 +15,8 @@ public class BtnShowPanel1 : MonoBehaviour {
 	public Text lightTxt;
 	public Text temperatureTxt;
 	public Text waterTempTxt;
-//	public Text pumpSpeedTxt;
-
-//	int plantId;
 
 	void Start () {
-//		plantId = PlayerPrefs.GetInt ("plantID");
 		rect = panel.GetComponent<RectTransform> ();
 	}
 	
@@ -29,10 +25,9 @@ public class BtnShowPanel1 : MonoBehaviour {
 			rect.anchoredPosition = Vector3.zero;
 			EditPanel ();
 			show = true;
-//			StartCoroutine ("ReadDataQuery");
+
 		} else {
 			rect.anchoredPosition = new Vector3(-220,0,0);
-//			StopCoroutine ("ReadDataQuery");
 			show = false;
 		}
 	}
@@ -41,7 +36,6 @@ public class BtnShowPanel1 : MonoBehaviour {
 		while (true) {
 			WWWForm form = new WWWForm ();
 			form.AddField ("action", "readPotInput");
-//			form.AddField ("plantId", plantId);
 			WWW itemsData = new WWW ("http://54.169.202.67/plantopia_API.php", form);
 			yield return itemsData;
 			print (itemsData.text);
@@ -51,7 +45,6 @@ public class BtnShowPanel1 : MonoBehaviour {
 			lightTxt.text = PlayerPrefs.GetFloat ("light").ToString () + " lux";
 			temperatureTxt.text = PlayerPrefs.GetFloat ("temperature").ToString ("#.##") + " °C";
 			waterTempTxt.text = PlayerPrefs.GetFloat ("waterTemp").ToString () + " °C";
-//			pumpSpeedTxt.text = PlayerPrefs.GetFloat ("pumpSpeed") + " L/min";
 
 
 			PlayerPrefs.SetFloat ("light", float.Parse(items [2]));

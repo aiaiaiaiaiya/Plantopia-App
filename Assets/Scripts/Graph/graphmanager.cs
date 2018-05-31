@@ -16,16 +16,11 @@ public class graphmanager : MonoBehaviour {
 	public List<float> avglight = new List<float>();
 	public List<float> avgwater = new List<float>();
 	public List<float> avgtemp = new List<float>();
-//	List<Image> golight = new List<Image>();
-//	List<Image> gowater = new List<Image>();
-//	List<Image> gotemp = new List<Image>();
 
 	public Text dateTxt;
 
 	// Use this for initialization
 	void Start () {
-//		string date = System.DateTime.Now.ToString("yyyy-MM-dd"); //.ToString("yyyy-MM-dd HH:mm:ss");
-//		print (date);
 		string date;
 		date = System.DateTime.Now.ToString ("yyyy-MM-dd");
 		dateTxt.text = date;
@@ -38,15 +33,12 @@ public class graphmanager : MonoBehaviour {
 			Image l = Instantiate (bar,spawnBarLight.transform);
 			l.transform.localPosition += new Vector3 (i * width, 0, 0);
 			l.rectTransform.sizeDelta = new Vector2 (width, (avglight[i]/400)*260);
-//			golight.Add (l);
 			Image w = Instantiate (bar,spawnBarWater.transform);
 			w.transform.localPosition += new Vector3 (i * width, 0, 0);
 			w.rectTransform.sizeDelta = new Vector2 (width, (avgwater[i]/40)*260);
-//			gowater.Add (w);
 			Image t = Instantiate (bar,spawnBarTemp.transform);
 			t.transform.localPosition += new Vector3 (i * width, 0, 0);
 			t.rectTransform.sizeDelta = new Vector2 (width, (avgtemp[i]/40)*260);
-//			gotemp.Add (t);
 		}
 	}
 		

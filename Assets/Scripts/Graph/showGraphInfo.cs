@@ -13,11 +13,6 @@ public class showGraphInfo : MonoBehaviour {
 	void Start () {
 		sc = GameObject.Find ("Graph Manager").GetComponent<graphmanager> ();
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
 	public void HoverEnter(){
 		panel = this.gameObject.transform.GetChild (0).gameObject;
